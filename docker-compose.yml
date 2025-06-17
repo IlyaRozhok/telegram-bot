@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    container_name: finfix-db
+    environment:
+      POSTGRES_USER: finadmin
+      POSTGRES_PASSWORD: finfix_pass
+      POSTGRES_DB: finfix
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    container_name: finfix-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: i_rozhok@icloud.com
+      PGADMIN_DEFAULT_PASSWORD: finadmin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:
