@@ -14,11 +14,11 @@ const {
 if (!DB_USER || !DB_PASSWORD || !DB_NAME) {
   throw new Error("Missing required PostgreSQL environment variables");
 }
-
+const port = process.env.DB_PORT || "10000";
 const sequelize = new Sequelize({
   dialect: "postgres",
   host: DB_HOST,
-  port: parseInt(DB_PORT, 10),
+  port: parseInt(port, 10),
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
